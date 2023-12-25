@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru-RU">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="{% static 'reports/styles.css' %}">
+        <title>Reports</title>
+    </head>
+    <body>
+        <div class="roof" >
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="leftcol">
+                        <img width="100" height="100" src="{% static 'reports/images/asi.png' %}"> 
+                    </td>
+                    <td><span class="mainText">Корпорация АСИ</span></td>
+                </tr>
+            </table> 
+        </div>       
+        <hr /> 
+        <div class="centering">
+            {% if reports_list %}
+                <select onchange="if (this.value) window.location.href = this.value">
+                    <option>Select report</option>
+                    {% for report in reports_list %}
+                       <option value="/{{ report.id }}/">{{ report.id }}</option> 
+                    {% endfor %}
+                </select>
+            {% else %}
+                <p>No reports are available</p>
+            {% endif %}
+        </div>
+    </body>
+</html>

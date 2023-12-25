@@ -1,0 +1,15 @@
+.centering {
+    display: flex;
+    justify-content: center;
+}
+
+
+.leftcol {
+    width: 110px;
+    vertical-align: top;
+}
+
+.mainText {
+    font-size: 20px;
+    font-weight: bold;
+}

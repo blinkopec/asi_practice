@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="{% static 'reports/styles.css' %}">
+
+        <title>Report</title>
+    </head>
+
+    <body>
+        <div class="roof">
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="leftcol">
+                        <img width="100" height="100" src="{% static 'reports/images/asi.png' %}">
+                    </td>
+                    <td><span class="mainText">Корпорация АСИ</span></td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        <div class="centering">
+            {% if reports_list %}
+            <select onchange="if (this.value) window.location.href = this.value">
+                <option>{{ mainReport.id }}</option>
+                {% for report in reports_list %}
+                {% if report.id != mainReport.id %}
+                <option value="/{{ report.id }}/">{{ report.id }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            {% else %}
+            <p>No reports are available</p>
+            {% endif %}
+        </div>
+
+        <!-- Документ -->
+        <div class="centering">
+            <table>
+                <tr>
+                    <td>Дата начала испытания: {{ mainReport.startDate }}</td>
+                    <td width="200"/>
+                </tr>
+                <tr>
+                    <td>Дата конца испытания: {{ mainReport.endDate }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class=centering>
+            <table border="5" width="500">
+                <tr>
+                    <td>Начальная температура</td>
+                    <td>
+                        {% for d in data %}
+                        {% if d.idInputData.startTemperature != null %}
+                        {{ d.idInputData.startTemperature }}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Конечная температура</td>
+                    <td>
+                        {% for d in data %}
+                        {% if d.idInputData.endTemperature != null %}
+                        {{ d.idInputData.endTemperature }}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Теплоемкость вещества</td>
+                    <td>
+                        {% for d in data %}
+                        {% if d.idInputData.thremalCapacity != null %}
+                        {{ d.idInputData.thremalCapacity }}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Вес</td>
+                    <td>
+                        {% for d in data %}
+                        {% if d.idInputData.weigth != null %}
+                        {{ d.idInputData.weigth }}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Количество теплоты</td>
+                    <td>
+                        {{ Q }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="centering">
+            <table>
+                <tr>
+                    <td width="250">Дата проверки отчета: {{ mainReport.dateReport }}</td>
+                    <td width="250">Подпись: {{ mainReport.surname }}  {{ mainReport.name }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="centering">
+            <p><a href="/{{ mainReport.id }}/form/">Редактировать</a></p>
+        </div>
+    </body>
+
+</html>

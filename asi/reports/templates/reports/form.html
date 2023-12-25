@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru-RU">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'reports/styles.css' %}">
+
+        <title>Edit</title>
+    </head>
+    <body>
+        <div class="centering">
+            <table>
+                <form method="post">
+                    {% csrf_token %}
+                    {{form}}
+                </form>
+            </table>
+           
+        </div>
+        <div class="centering">
+            <input type="submit" value="Сохранить">
+        </div>
+    </body>
+</html>
